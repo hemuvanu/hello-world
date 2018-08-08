@@ -1,14 +1,11 @@
 "use strict";
 let express  = require("express");
 let bodyParser = require('body-parser');
-let formidable = require('formidable');
-let fs = require('fs');
+
 
 // let cors = require('cors');
 
 let userSchema = require('./schema/userDetail');
-
-var multer = require('multer');
 
 let app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -85,23 +82,7 @@ app.post('/deleteuser',function(req,res){
 
 
 
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, __dirname+'/uploads/')
-    },
-    filename: function (req, file, cb) {
-      cb(null, file.fieldname + '-' + Date.now())
-    }
-  })
-  
-  var upload = multer({ storage: storage })
-  
-  //passing multer as middleware
-  app.post('/profile',upload.any(), function(req, res) {
-    Buffer.from(req.body.myFile, 'base64')
-    fs.writeFile(data, 'my-file.png')
-  
-   });
+
 
 
 
